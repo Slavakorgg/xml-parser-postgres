@@ -15,11 +15,18 @@
     </properties>
 
     <dependencies>
-        <!-- Groovy для XmlSlurper (обновлена версия) -->
+        <!-- Базовая зависимость Groovy (уже есть) -->
         <dependency>
-            <groupId>org.apache.groovy</groupId>
+            <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>4.0.20</version>
+            <version>3.0.25</version>
+        </dependency>
+
+        <!-- ДОБАВЬТЕ: модуль для работы с XML -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-xml</artifactId>
+            <version>3.0.25</version> <!-- Та же версия, что и у groovy -->
         </dependency>
 
 
@@ -48,6 +55,12 @@
     <build>
         <finalName>xml-parser</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>3.7.0</version>
+                <extensions>true</extensions>
+            </plugin>
             <!-- Плагин компилятора (явное указание версии) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
