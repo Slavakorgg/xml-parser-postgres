@@ -15,18 +15,16 @@
     </properties>
 
     <dependencies>
-        <!-- Базовая зависимость Groovy (уже есть) -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
             <version>3.0.25</version>
         </dependency>
 
-        <!-- ДОБАВЬТЕ: модуль для работы с XML -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
-            <version>3.0.25</version> <!-- Та же версия, что и у groovy -->
+            <version>3.0.25</version>
         </dependency>
 
 
@@ -37,19 +35,7 @@
             <version>42.7.3</version>
         </dependency>
 
-        <!-- SLF4J API -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
-        </dependency>
 
-        <!-- Реализация SLF4J (выводим логи в консоль) -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.13</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -61,7 +47,6 @@
                 <version>3.7.0</version>
                 <extensions>true</extensions>
             </plugin>
-            <!-- Плагин компилятора (явное указание версии) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -73,7 +58,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Плагин для сборки JAR со всеми зависимостями -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -86,11 +70,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <archive>
-                                <manifest>
-                                    <mainClass>com.example.Main</mainClass> <!-- Укажите ваш Main-класс -->
-                                </manifest>
-                            </archive>
+
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
