@@ -51,7 +51,7 @@ ON CONFLICT ("vendorCode") DO UPDATE ...
 
 Класс `parser.Main` реализует простой консольный интерфейс:
 
-- при запуске без аргументов показывает меню:
+- при запуске показывает меню:
 
   ```text
   1) getTableNames  2) getTableDDL(table)  3) update()  4) update(table)  0) exit
