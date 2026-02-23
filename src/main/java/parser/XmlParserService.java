@@ -7,6 +7,7 @@ import groovy.xml.slurpersupport.NodeChild;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -115,19 +116,22 @@ public class XmlParserService implements AutoCloseable {
         return ddl.toString();
     }
 
-    // Обновляет все таблицы. При смене структуры — exception
+    // Обновляет все таблицы
     public void update() throws Exception {
         for (String t : getTableNames()) update(t);
     }
 
-    /// Обновляет одну таблицу. При смене структуры — exception
+    // Обновляет одну таблицу
     public void update(String tableName) throws Exception {
         GPathResult xml = parse();
         String tag = tableTag(tableName);
         GPathResult section = null;
         for (Object c : (Iterable<?>) xml.children().children()) {
             GPathResult node = (GPathResult) c;
-            if (tag.equals(node.name())) { section = node; break; }
+            if (tag.equals(node.name())) {
+                section = node;
+                break;
+            }
         }
         if (section == null) throw new IllegalArgumentException("Table not in XML: " + tableName);
 
@@ -151,7 +155,11 @@ public class XmlParserService implements AutoCloseable {
         for (int i = 1; i < rows.size(); i++) xmlCols.addAll(rows.get(i).keySet());
         String pk = "offers".equals(tableName) ? "vendorCode" : "id";
         if (!xmlCols.contains(pk)) {
-            for (String k : xmlCols) if ("id".equalsIgnoreCase(k) || "vendorcode".equalsIgnoreCase(k)) { pk = k; break; }
+            for (String k : xmlCols)
+                if ("id".equalsIgnoreCase(k) || "vendorcode".equalsIgnoreCase(k)) {
+                    pk = k;
+                    break;
+                }
         }
 
         Set<String> dbCols = getColumns(tableName);
