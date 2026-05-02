@@ -164,6 +164,7 @@ public class XmlParserService implements AutoCloseable {
 
         Set<String> dbCols = getColumns(tableName);
         if (dbCols.isEmpty()) {
+
             conn.createStatement().execute(getTableDDL(tableName));
             dbCols = getColumns(tableName);
         }
